@@ -11,3 +11,11 @@ yourusername ALL=(all) NOPASSWD: /path/to/openvpn
 б) И в python сделайте что-то вроде: 
 import subprocess
 exitcode = subprocess.call(["sudo","openvpn","--cd /etc/openvpn --config openvpn.conf"])
+
+ping2 
+Cкрипт пингует Arduino mega-110 и если он на в сети то, ставит значение свойства объекта цифру "1" (A_110.value = 1)
+если Arduino mega-110 не в сети то, ставит значение свойства объекта цифру "0" (A_110.value = 0) 
+Для запуска скрипта Python из PHP пишем скрипт для PHP с кодом:
+
+$test = exec('/usr/bin/python3  /home/pi/scripts/ping.py');
+echo $test;
