@@ -19,3 +19,6 @@ Cкрипт пингует Arduino mega-110 и если он на в сети т
 
 $test = exec('/usr/bin/python3  /home/pi/scripts/ping.py');
 echo $test;
+
+class_ping.py
+Мой первый ООП код! 28.06.19
