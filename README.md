@@ -3,9 +3,11 @@
 
 rus_1.py лучше чем rus_2.py т.к. быстрее "если первая буква русская - все слово русское"!
 
-ping.py 
+# ping.py 
+# https://stackoverflow.com/questions/2018606/using-python-expect-to-run-openvpn
 скрипт проверяет наличие интернета и если есть то, запускает OpenVPN 
 а) Изменить в /etc/sudoers, чтобы команда openvpn могла выполняться без указания пароля.
+yourusername ALL=(all) NOPASSWD: /path/to/openvpn
 б) И в python сделайте что-то вроде: 
 import subprocess
 exitcode = subprocess.call(["sudo","openvpn","--cd /etc/openvpn --config openvpn.conf"])
