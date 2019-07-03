@@ -3,8 +3,8 @@
 
 rus_1.py лучше чем rus_2.py т.к. быстрее "если первая буква русская - все слово русское"!
 
-# ping.py 
-# https://stackoverflow.com/questions/2018606/using-python-expect-to-run-openvpn
+ping.py 
+https://stackoverflow.com/questions/2018606/using-python-expect-to-run-openvpn
 скрипт проверяет наличие интернета и если есть то, запускает OpenVPN 
 а) Изменить в /etc/sudoers, чтобы команда openvpn могла выполняться без указания пароля.
 yourusername ALL=(all) NOPASSWD: /path/to/openvpn
@@ -22,3 +22,7 @@ echo $test;
 
 class_ping.py
 Мой первый ООП код! 28.06.19
+
+
+beskone4nii_ping.sh
+Бесконечно пингует и если статус изменился пише в лог!
