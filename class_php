@@ -1,0 +1,25 @@
+class XrenClass
+{
+    // объявление свойства
+    public $arrXren = array();
+
+   function __construct($arr) {
+       $this->arrXren = $arr;
+   }
+
+    // объявление метода
+    public function arrActiveXren() {
+      foreach ($this->arrXren as $key => $val) {
+        $str=getUrl('http://192.168.18.110/state?c=get&n='.$val);
+        $num = explode(";", $str);
+        echo "Ключ $num[0] Значение $num[1] <br>";
+      }	
+    }
+}
+
+
+
+$arr = array(51, 52, 53, 54);
+
+$a = new XrenClass($arr);
+$a->arrActiveXren();
