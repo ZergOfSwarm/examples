@@ -1,72 +1,72 @@
 //https://www.geeksforgeeks.org/how-to-calculate-the-difference-between-two-dates-in-php/	
+// Действующий метод "setRelayState2"
 
-	$start_date = "11.12.2000 11:30:05"; // Время включения 
-	#echo "Время включения = " . $start_date. "<br />\n";
-	#$now_date = date("d-m-Y H:i:s"); // Текущая дата
-	$stop_date = "12.12.2019 11:30:00"; // Время выключения
-	#echo "Время отключения = " . $stop_date. "<br />\n";
-	$start_date_unix = strtotime($start_date);
-	#echo "Время включения в секундах = " . $start_date_unix. "<br />\n";
-	$stop_date_unix = strtotime($stop_date);
-	#echo "Время отключения в секундах = " . $stop_date_unix. "<br />\n";
-	echo "<br />\n";
+$objects=getObjectsByClass("MegaLight2");
+foreach($objects as $obj) {
+ if(gg($obj['TITLE'].".ID") == $params["id"])
+ {
+    sg($obj['TITLE'].".status", $params["on"]);
+    sg($obj['TITLE'].".value", $params["v"]);
 
+$now_date = date("d-m-Y H:i:s");
 
-$result_1 = ($stop_date_unix-$start_date_unix); // Общее количество секунд работы
-#echo "Общее количество секунд работы = " . $result_1. "<br />\n";
+    if(gg($obj['TITLE'].".status") == '1')
+    {
+    sg($obj['TITLE'].".time_ON", $now_date);
+    sg($obj['TITLE'].".on_off_auto", 'Вкл.');
+    #runScript('Economy_mode_for_past_time');
+    #runScript('Desable_EconomeMode');
+    say('Свет включили  '.gg($obj['TITLE'].".info").' с настенного выключателя!',1);
+    }
+    else
+    {
+    sg($obj['TITLE'].".time_OFF", $now_date);
+    sg($obj['TITLE'].".on_off_auto", 'Откл.');
+    say('Свет отключили  '.gg($obj['TITLE'].".info").' с настенного выключателя!',1);
+    
+$time_ON=gg($obj['TITLE'].".time_ON");        // Время предыдущего включения света
+$time_OFF=gg($obj['TITLE'].".time_OFF");     // Время предыдущего отключения света
+$total_unix_time =gg($obj['TITLE'].".total_unix_time");  // Общее время работы лампы
+$A = strtotime($time_OFF) - strtotime($time_ON); // Расчитываем предыдущее количество секунд работы лампы
+sg($obj['TITLE'].".previous_unix_time",$A); // Записываем предыдущее время работы в свойство объекта
+$B = $total_unix_time  + $A; // Расчитываем общее количество секунд работы лампы
+sg($obj['TITLE'].".total_unix_time",$B); // Устанавливаем общее время работы
+     
+    #callMethod($obj['TITLE']. ".Test_time_metod");
 
-	// Declare and define two dates 
-#$date1 = strtotime("1978-04-25 22:45:00");  
-#$date2 = strtotime("2019-12-11 10:44:01");  
-  
-// Formulate the Difference between two dates 
-#$diff = abs($date2 - $date1);  
-$diff = $result_1;
-  
-// To get the year divide the resultant date into 
-// total seconds in a year (365*60*60*24) 
-$years = floor($diff / (365*60*60*24));  
-  
-  
-// To get the month, subtract it with years and 
-// divide the resultant date into 
-// total seconds in a month (30*60*60*24) 
-$months = floor(($diff - $years * 365*60*60*24) 
-                               / (30*60*60*24));  
-  
-  
-// To get the day, subtract it with years and  
-// months and divide the resultant date into 
-// total seconds in a days (60*60*24) 
-$days = floor(($diff - $years * 365*60*60*24 -  
-             $months*30*60*60*24)/ (60*60*24)); 
-  
-  
-// To get the hour, subtract it with years,  
-// months & seconds and divide the resultant 
-// date into total seconds in a hours (60*60) 
-$hours = floor(($diff - $years * 365*60*60*24  
-       - $months*30*60*60*24 - $days*60*60*24) 
-                                   / (60*60));  
-  
-  
-// To get the minutes, subtract it with years, 
-// months, seconds and hours and divide the  
-// resultant date into total seconds i.e. 60 
-$minutes = floor(($diff - $years * 365*60*60*24  
-         - $months*30*60*60*24 - $days*60*60*24  
-                          - $hours*60*60)/ 60);  
-  
-  
-// To get the minutes, subtract it with years, 
-// months, seconds, hours and minutes  
-$seconds = floor(($diff - $years * 365*60*60*24  
-         - $months*30*60*60*24 - $days*60*60*24 
-                - $hours*60*60 - $minutes*60));  
-  
-// Print the result 
-#printf("%d years, %d months, %d days, %d hours, "
-#     . "%d minutes, %d seconds", $years, $months, 
-#             $days, $hours, $minutes, $seconds); 
-#setGlobal('2E_Hall_r51.total_time ',("лет/год(а) = $years. месяц(ев) = $months. день(дней) = $days. час(ов) = $hours. минут(ы) = $minutes. секунд(а) = $seconds"));
-setGlobal('2E_Hall_r51.total_time ',("$years.-лет/год(а) $months.-месяц(ев) $days.-день(дня/дней) $hours.-час(ов) $minutes.-минут(ы) $seconds-секунд(а)"));
+$diff = $B;
+$years = floor($diff / (365*60*60*24)); 
+if ($years > 0) 
+  $years = $years."-год(а/лет/)";
+else 
+  $years = FALSE;
+$months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24)); 
+if ($months > 0) 
+  $months = $months."-месяц(а/ев)";
+else 
+  $months = FALSE;
+$days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24)); 
+if ($days > 0) 
+  $days = $days."-день(я/ей)";
+else 
+  $days = FALSE;
+$hours = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24) / (60*60));
+if ($hours > 0) 
+  $hours = $hours."-час(а/ов)";
+else 
+  $hours = FALSE;
+$minutes = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60)/ 60); 
+if ($minutes > 0) 
+  $minutes = $minutes."-минут(а/ы)";
+else 
+  $minutes = FALSE;
+$seconds = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60 - $minutes*60));
+if ($seconds > 0) 
+  $seconds = $seconds."-секунд";
+else 
+  $seconds = FALSE;
+setGlobal($obj['TITLE'].".total_time",("$years$months$days$hours$minutes$seconds"));
+    }
+   break;
+ }
+}
